@@ -7,8 +7,12 @@ void main() {
   for (final fse in appsDir.listSync()) {
     // read file as json
     if (fse is File) {
-      LocaleUnit(locale: fse.path.split('/').last.split('.').first)
-          .fitAllToFastlane();
+      final locale = fse.path.split('/').last.split('.').first;
+      final lu = LocaleUnit(locale: locale);
+      if (locale == 'en-US') {
+        lu.isMainLocale = true;
+      }
+      lu.fitAllToFastlane();
     }
   }
   print('done');
