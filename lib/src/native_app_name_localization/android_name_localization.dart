@@ -12,6 +12,9 @@ class AndroidNameLocalization {
     'tr-TR': 'tr',
     'pt-PT': 'pt-rPT',
     'es-ES': 'es-rES',
+    'ko-KR': 'ko',
+    'vi-VN': 'vi',
+    'ru-RU': 'ru',
   };
 
   String get resFolder => '$srcFolder/res';
@@ -32,7 +35,8 @@ class AndroidNameLocalization {
     }
 
     // xmlを作成して書き込む
-    final xml = '''<resources>
+    final xml = '''
+<resources>
     <string name="app_name">$appName</string>
 </resources>
 ''';
@@ -49,9 +53,10 @@ class AndroidNameLocalization {
     _removeComments(manifestXml);
 
     final manifestNode = manifestXml.findElements('manifest').first;
-    final applicationNode = manifestNode.findElements('application').first;
-
-    applicationNode.setAttribute('android:label', '@string/app_name');
+    manifestNode
+        .findElements('application')
+        .first
+        .setAttribute('android:label', '@string/app_name');
     final updatedManifestContent = manifestXml.toXmlString(
       pretty: true,
       indent: '    ',

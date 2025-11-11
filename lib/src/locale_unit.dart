@@ -9,6 +9,7 @@ class LocaleUnit {
     required this.locale,
   });
 
+  /// https://developer.apple.com/documentation/appstoreconnectapi/managing-metadata-in-your-app-by-using-locale-shortcodes
   static final iosLocaleMap = {
     'zh-CN': 'zh-Hans',
     'zh-TW': 'zh-Hant',
@@ -17,6 +18,9 @@ class LocaleUnit {
     'tr-TR': 'tr',
     'pt-PT': 'pt-PT',
     'es-ES': 'es-ES',
+    'ko-KR': 'ko',
+    'vi-VN': 'vi',
+    'ru-RU': 'ru',
   };
 
   bool isMainLocale = false;
@@ -45,10 +49,9 @@ class LocaleUnit {
 
   void _fitAndroidShortDescriptionToFastlane() {
     final shortDescription = _getAndroidShortDescription();
-    final fastlaneAndroidShortDescriptionFile =
-        File('$metadataDir/android/$locale/short_description.txt');
-
-    fastlaneAndroidShortDescriptionFile.writeAsStringSync(shortDescription);
+    File('$metadataDir/android/$locale/short_description.txt')
+      ..createSync(recursive: true)
+      ..writeAsStringSync(shortDescription);
   }
 
   void _fitAppNameAndroid() {
@@ -103,48 +106,45 @@ class LocaleUnit {
       iosDescription = '$iosDescription\n\n[:mav: $minimumVersion]';
     }
 
+    fastlaneAndroidDescriptionFile.createSync(recursive: true);
+    fastlaneIosDescriptionFile.createSync(recursive: true);
     fastlaneAndroidDescriptionFile.writeAsStringSync(androidDescription);
     fastlaneIosDescriptionFile.writeAsStringSync(iosDescription);
   }
 
   void _fitIosPrivacyUrlToFastlane() {
     final privacyUrl = _getIosPrivacyUrl();
-    final fastlaneIosPrivacyUrlFile =
-        File('$metadataDir/${iosLocaleMap[locale]!}/privacy_url.txt');
-
-    fastlaneIosPrivacyUrlFile.writeAsStringSync(privacyUrl);
+    File('$metadataDir/${iosLocaleMap[locale]!}/privacy_url.txt')
+      ..createSync(recursive: true)
+      ..writeAsStringSync(privacyUrl);
   }
 
   void _fitIosSubtitleToFastlane() {
     final subtitle = _getIosSubtitle();
-    final fastlaneIosSubtitleFile =
-        File('$metadataDir/${iosLocaleMap[locale]!}/subtitle.txt');
-
-    fastlaneIosSubtitleFile.writeAsStringSync(subtitle);
+    File('$metadataDir/${iosLocaleMap[locale]!}/subtitle.txt')
+      ..createSync(recursive: true)
+      ..writeAsStringSync(subtitle);
   }
 
   void _fitIosSupportUrlToFastlane() {
     final supportUrl = _getIosSupportUrl();
-    final fastlaneIosSupportUrlFile =
-        File('$metadataDir/${iosLocaleMap[locale]!}/support_url.txt');
-
-    fastlaneIosSupportUrlFile.writeAsStringSync(supportUrl);
+    File('$metadataDir/${iosLocaleMap[locale]!}/support_url.txt')
+      ..createSync(recursive: true)
+      ..writeAsStringSync(supportUrl);
   }
 
   void _fitStoreKeywordsToFastlane() {
     final storeKeywords = _getStoreKeywords();
-    final fastlaneIosStoreKeywordsFile =
-        File('$metadataDir/${iosLocaleMap[locale]!}/keywords.txt');
-
-    fastlaneIosStoreKeywordsFile.writeAsStringSync(storeKeywords);
+    File('$metadataDir/${iosLocaleMap[locale]!}/keywords.txt')
+      ..createSync(recursive: true)
+      ..writeAsStringSync(storeKeywords);
   }
 
   void _fitStorePromotionalTextToFastlane() {
     final promotionalText = _getStorePromotionalText();
-    final fastlaneIosStorePromotionalTextFile =
-        File('$metadataDir/${iosLocaleMap[locale]!}/promotional_text.txt');
-
-    fastlaneIosStorePromotionalTextFile.writeAsStringSync(promotionalText);
+    File('$metadataDir/${iosLocaleMap[locale]!}/promotional_text.txt')
+      ..createSync(recursive: true)
+      ..writeAsStringSync(promotionalText);
   }
 
   void _fitStoreReleaseNoteToFastlane() {
@@ -154,6 +154,8 @@ class LocaleUnit {
     final fastlaneIosStoreReleaseNoteFile =
         File('$metadataDir/${iosLocaleMap[locale]!}/release_notes.txt');
 
+    fastlaneAndroidStoreReleaseNoteFile.createSync(recursive: true);
+    fastlaneIosStoreReleaseNoteFile.createSync(recursive: true);
     fastlaneAndroidStoreReleaseNoteFile.writeAsStringSync(storeReleaseNote);
     fastlaneIosStoreReleaseNoteFile.writeAsStringSync(storeReleaseNote);
   }
