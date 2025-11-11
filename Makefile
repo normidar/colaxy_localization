@@ -82,18 +82,18 @@ add_dependency: ## Add a dependency to the package: `make add_dependency <depend
 	fi
 
 .PHONY: rename
-rename: ## Rename in all files from dart_pkg_temp to <new_name>: `make rename <new_name>`
+rename: ## Rename in all files from colaxy_localization to <new_name>: `make rename <new_name>`
 	@if [ -z "$(filter-out $@,$(MAKECMDGOALS))" ]; then \
 		echo "\033[0;31mPlease provide a new name."; \
 		echo "\033[0;33mUsage: make rename <new_name>"; \
 		exit 1; \
 	else \
 		NEW_NAME=$(filter-out $@,$(MAKECMDGOALS)); \
-		echo "\033[0;32mRenaming dart_pkg_temp to $$NEW_NAME in all files..."; \
-		find . -type f \( -name "*.dart" -o -name "*.yaml" -o -name "*.yml" -o -name "*.md" -o -name "*.json" \) -not -path "./.dart_tool/*" -not -path "./build/*" -not -path "./.git/*" | xargs sed -i '' "s/dart_pkg_temp/$$NEW_NAME/g"; \
-		echo "\033[0;32mRenaming lib/dart_pkg_temp.dart to lib/$$NEW_NAME.dart..."; \
-		if [ -f "lib/dart_pkg_temp.dart" ]; then \
-			mv "lib/dart_pkg_temp.dart" "lib/$$NEW_NAME.dart"; \
+		echo "\033[0;32mRenaming colaxy_localization to $$NEW_NAME in all files..."; \
+		find . -type f \( -name "*.dart" -o -name "*.yaml" -o -name "*.yml" -o -name "*.md" -o -name "*.json" \) -not -path "./.dart_tool/*" -not -path "./build/*" -not -path "./.git/*" | xargs sed -i '' "s/colaxy_localization/$$NEW_NAME/g"; \
+		echo "\033[0;32mRenaming lib/colaxy_localization.dart to lib/$$NEW_NAME.dart..."; \
+		if [ -f "lib/colaxy_localization.dart" ]; then \
+			mv "lib/colaxy_localization.dart" "lib/$$NEW_NAME.dart"; \
 		fi; \
 		echo "\033[0;32mRename completed successfully!"; \
 		echo "\033[0;33mModified files:"; \
